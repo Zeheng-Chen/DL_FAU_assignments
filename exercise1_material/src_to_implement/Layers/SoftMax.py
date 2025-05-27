@@ -1,10 +1,11 @@
 import numpy as np
+from .Base import BaseLayer
 
-
-class SoftMax:
+class SoftMax(BaseLayer):
     def __init__(self):
+        super().__init__()
         self.output = None  # 用于存储前向传播的输出
-        self.trainable = False
+
 
     def forward(self, input_tensor):
         #为了防止数值溢出，减去输入张量中的每一行的最大值。这样可以使得输入张量的值更加接近0，从而避免指数函数导致的数值溢出问题。

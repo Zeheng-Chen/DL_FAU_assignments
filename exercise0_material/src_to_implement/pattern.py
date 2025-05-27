@@ -15,7 +15,6 @@ class Checker:
         x, y = np.indices((self.resolution, self.resolution))
         x_tile = x // self.tile_size
         y_tile = y // self.tile_size
-
         self.output = (x_tile + y_tile) % 2;
         return self.output.copy()
 
@@ -39,7 +38,8 @@ class Circle:
             self.output = np.zeros((self.resolution, self.resolution))
         else:
             self.output = np.zeros((self.resolution, self.resolution))
-            x, y = np.meshgrid(np.arange(self.resolution), np.arange(self.resolution))
+            # x, y = np.meshgrid(np.arange(self.resolution), np.arange(self.resolution))
+            y ,x = np.indices((self.resolution, self.resolution))
             distance = np.sqrt((x - self.position[0]) ** 2 + (y - self.position[1]) ** 2)
             self.output[distance <= self.radius] = 1
 
@@ -61,15 +61,21 @@ class Spectrum:
         green_channel = np.linspace(0, 1, self.resolution)
         blue_channel = np.linspace(0, 1, self.resolution)
 
+        # red, green = np.meshgrid(red_channel, green_channel)
+        #
         spectrum = np.zeros((self.resolution, self.resolution, 3))
+        # spectrum[:, :, 0] = red
+        # spectrum[:, :, 1] = green
+
+
         # print(spectrum)
-        spectrum[:, :, 0] = red_channel[np.newaxis]
+        spectrum[:, :, 0] = red_channel[np.newaxis, :]
         # print('----------red')
         # print(spectrum)
         spectrum[:, :, 1] = green_channel[:, np.newaxis]
-        # print('---------green')
+        # # print('---------green')
         # print(spectrum)
-        spectrum[:, :, 2] = np.abs(blue_channel[np.newaxis] - 1)
+        spectrum[:, :, 2] = np.abs(blue_channel[np.newaxis, :] - 1)
         # print('------blue')
         # print(spectrum)
 
@@ -84,17 +90,17 @@ class Spectrum:
 
 
 # # Main script
-# if __name__ == "__main__":
-#     # Test Checker class
-#     resolution = 20
-#     tile_size = 2
-#     checker = Checker(resolution, tile_size)
-#     checker.draw()
-#     checker.show()
-#     circle = Circle(resolution=1000, radius=250, position=(500, 400))
-#     circle.draw()
-#     circle.show()
-#     spectrum = Spectrum(4)
-#     spectrum.draw()
-#     spectrum.show()
+if __name__ == "__main__":
+    # Test Checker class
+    # resolution = 20
+    # tile_size = 2
+    # checker = Checker(resolution, tile_size)
+    # checker.draw()
+    # checker.show()
+    # circle = Circle(resolution=100, radius=25, position=(50, 40))
+    # circle.draw()
+    # circle.show()
+    spectrum = Spectrum(4)
+    spectrum.draw()
+    spectrum.show()
 

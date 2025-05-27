@@ -18,11 +18,13 @@ class FullyConnected(BaseLayer):
         bias_term = np.ones((input_tensor.shape[0], 1))
         input_with_bias = np.hstack((input_tensor, bias_term))
         self.last_input = input_with_bias  # 保存完整的输入用于反向传播
-        return np.dot(input_with_bias, self.weights.T)
+        # return np.dot(input_with_bias, self.weights.T)
+        return input_with_bias @ self.weights.T
 
     def backward(self, error_tensor):
         # Calculate gradients
-        self.gradient_weights = np.dot(error_tensor.T, self.last_input)
+        # self.gradient_weights = np.dot(error_tensor.T, self.last_input)
+        self.gradient_weights = error_tensor.T @ self.last_input
         self.gradient_biases = error_tensor.sum(axis=0)
         self.update_weights()
         return np.dot(error_tensor, self.weights[:, :-1])
