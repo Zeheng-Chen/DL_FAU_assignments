@@ -8,10 +8,8 @@ class FullyConnected(BaseLayer):
         self._optimizer = None
         self.gradient_weights = None
         self.gradient_biases = None
-        self.input_size = input_size
-        self.output_size = output_size
         self.weights = np.random.uniform(low=0.0, high=1.0, size=(output_size, input_size + 1))
-        self.biases = np.random.uniform(low=0.0, high=1.0, size=output_size)
+        # self.biases = np.random.uniform(low=0.0, high=1.0, size=output_size)
 
     def forward(self, input_tensor):
         # 增加偏置处理项
@@ -32,7 +30,7 @@ class FullyConnected(BaseLayer):
     def update_weights(self):
         if self.trainable and self._optimizer:
             self.weights = self._optimizer.calculate_update(self.weights, self.gradient_weights)
-            self.biases = self._optimizer.calculate_update(self.biases, self.gradient_biases)
+            # self.biases = self._optimizer.calculate_update(self.biases, self.gradient_biases)
 
     @property
     def optimizer(self):

@@ -25,6 +25,3 @@ class SoftMax(BaseLayer):
 
         return temp
 
-#SoftMax函数用于将网络的输出（通常是logits，即未归一化的分数）转换为概率分布，使得输出值满足两个条件：
-#所有输出值都在0到1之间。
-#所有输出值的和为1
