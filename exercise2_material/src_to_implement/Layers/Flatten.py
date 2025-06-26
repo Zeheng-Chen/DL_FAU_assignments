@@ -1,7 +1,8 @@
 import numpy as np
-
-class Flatten:
+from .Base import BaseLayer
+class Flatten(BaseLayer):
     def __init__(self):
+        super().__init__()
         self.input_shape = None
 
     # compress the other dimension together: (B, C, H, W) -> (B, C*H*W)

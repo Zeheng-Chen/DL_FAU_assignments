@@ -44,8 +44,9 @@ class FullyConnected(BaseLayer):
 # 通过 getter 和 setter 方法，可以在不改变类的接口的情况下，对属性property的访问进行控制和封装。
 
     def initialize(self, weights_initializer, bias_initializer):
-        W_shape = (self.fan_in, self.fan_out)
+        W_shape = (self.fan_out, self.fan_in)
         B_shape = (self.fan_out, 1)
+
         W = weights_initializer.initialize(W_shape, self.fan_in, self.fan_out)
         B = bias_initializer.initialize(B_shape, self.fan_in, self.fan_out)
 

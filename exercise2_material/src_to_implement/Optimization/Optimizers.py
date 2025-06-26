@@ -17,7 +17,7 @@ class SgdWithMomentum:
         self.intermediate = None
     
     def calculate_update(self, weight_tensor, gradient_tensor):
-        if(self.intermediate == None):
+        if self.intermediate is None:
             self.intermediate = np.zeros_like(weight_tensor)
         
         self.intermediate = self.momentum_rate * self.intermediate - self.learning_rate * gradient_tensor
@@ -36,7 +36,7 @@ class Adam:
         
 
     def calculate_update(self, weight_tensor, gradient_tensor):
-        if(self.v == None):
+        if self.v is None:
             self.v = np.zeros_like(weight_tensor)
             self.r = np.zeros_like(weight_tensor)
         self.v = self.mu * self.v + (1-self.mu) * gradient_tensor
