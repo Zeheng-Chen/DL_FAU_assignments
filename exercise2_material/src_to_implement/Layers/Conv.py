@@ -118,7 +118,7 @@ class Conv(BaseLayer):
             return output
 
     def backward(self, error_tensor):
-        #clearn
+        #clean
         self.gradient_weights = np.zeros_like(self.weights)
         self.gradient_bias = np.zeros_like(self.bias)
         if len(self.convolution_shape) == 2:

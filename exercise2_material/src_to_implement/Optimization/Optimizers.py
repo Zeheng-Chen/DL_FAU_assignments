@@ -39,10 +39,12 @@ class Adam:
         if self.v is None:
             self.v = np.zeros_like(weight_tensor)
             self.r = np.zeros_like(weight_tensor)
+        # first-order, second-order momentum
         self.v = self.mu * self.v + (1-self.mu) * gradient_tensor
         self.r = self.rho * self.r + (1-self.rho) * (gradient_tensor * gradient_tensor)
 
         self.k += 1
+        # deviation correction
         v_hat = self.v / (1-self.mu**self.k)
         r_hat = self.r / (1-self.rho ** self.k)
         
